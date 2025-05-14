@@ -16,27 +16,27 @@
   #footnote[#link("https://emap.fgv.br/")[Escola de Matemática Aplicada, Fundação Getúlio Vargas (FGV/EMAp)], email: #link("mailto:arthur.oliveira.1@fgv.edu.br")]
 ])
 
-Em Análise Numérica, uma boa forma de medir o quão sensível um problema é a parturbações, definimos o número de condicionamento absoluto #footnote[#link("https://www.stat.uchicago.edu/~lekheng/courses/309/books/Trefethen-Bau.pdf")[Veja mais em Trefethen & Bau: Numerical Linear Algebra]] (e posteriormente o relativo) $hat(k)$ de um problema $f:X -> Y$ de um espaço vetorial _normado_ $X$ de dados noutro $Y$ de soluções como:
+Em Análise Numérica, uma boa forma de medir o quão sensível um problema é a parturbações é pelo número de condicionamento absoluto #footnote[#link("https://www.stat.uchicago.edu/~lekheng/courses/309/books/Trefethen-Bau.pdf")[Veja mais em Trefethen & Bau: Numerical Linear Algebra]] (e posteriormente o relativo) $hat(k)$ de um problema $f:X -> Y$ de um espaço vetorial _normado_ $X$ de dados noutro $Y$ de soluções como:
 
 $
   hat(kappa) = lim_(delta -> 0) sup_(norm(delta x) <= delta) norm(f(x + delta x) - f(x)) / norm(delta x)
 $
  
-Nos problemas de regressão linear e polinomial, investigamos o comportamento das matrizes associadas. Concluimos que, enquanto a regressão linear em geral possui condicionamento convergente, a regressão polinomial é extremamente sensível à perturbações à medida que o grau $n$ aumenta.
+Nos problemas de regressão linear e polinomial, investigamos o comportamento das matrizes associadas. Concluimos que, enquanto a regressão linear em geral possui condicionamento convergente, regressão polinomial é extremamente sensível à perturbações à medida que o grau polinomial $n$ aumenta.
 
-Documentamos casos em que o número de condicionamento ultrapassa $10^16$ para $n >= 8$, evidenciando severa instabilidade. Como aplicação interessante, usamos a decomposição SVD para compressão de imagens digitais, demonstrando uma abordagem de redução de custo que preserva características visuais importantes.
+Documentamos casos em que o número de condicionamento ultrapassa $10^16$ para $n >= 8$, evidenciando severa instabilidade. Como aplicação interessante, utilizamos a decomposição SVD para compressão de imagens digitais, demonstrando uma abordagem de redução de custo que preserva características visuais importantes.
 
-Neste processo, cada imagem é representada como uma matriz de pixels que pode ser decomposta via SVD na forma $A = U Sigma V^T$, onde os valores singulares (v.s) em $Sigma$ são ordenados de forma decrescente por relevância. Usamos regressão linear para encontrar uma quantidade ótima de valores singulares a reter.
+Neste processo, cada imagem é representada como uma matriz de pixels que pode ser decomposta via SVD: $A = U Sigma V^T$, onde os valores singulares (v.s) em $Sigma$ são ordenados de forma decrescente. Podemos reduzir a quantidade de valores singulares usados, e utilizamos regressão linear para encontrar uma quantidade ótima de valores singulares a reter.
 
-Para quantificar a eficiência da compressão, implementamos métricas de erro como MSE (Mean Squared Error) e PSNR (Peak Signal-to-Noise Ratio) e analisamos o comportamento dessas métricas em função do número de v.s utilizados. Concluimos que os primeiros v.s retêm a maior parte da qualidade de imagem, permitindo reconstruções satisfatórias com menos de $20percent$ dos v.s originais.
+Para quantificar a eficiência da compressão, utilizamos métricas de erro como MSE (Mean Squared Error) e PSNR (Peak Signal-to-Noise Ratio) e analisamos o comportamento destas em função do número de v.s utilizados. Concluimos que os maiores v.s retêm a maior parte da qualidade de imagem, permitindo reconstruções satisfatórias com menos de $20percent$ dos v.s originais.
 
 #figure(
-  image("progression_images.png", width: 36%),
+  image("progression_images.png", width: 32%),
   caption: [
     Um exemplo, com $k = $ quantidade de v.s utilizados
   ]
 )
 
-Além da redução significativa no armazenamento, demonstramos que o bom condicionamento da regressão linear permite predizer com confiabilidade o limiar ótimo de compressão para diferentes classes de imagens. Os resultados reforçam a importância do estudo do condicionamento numérico tanto para fins teóricos quanto para aplicações práticas em processamento de dados e imagens.
+Além da redução significativa no armazenamento, demonstramos que o bom condicionamento da regressão linear permite predizer com confiabilidade o limiar ótimo de compressão para diferentes imagens. Os resultados reforçam a importância do estudo do número de condicionamento tanto para fins teóricos quanto para aplicações práticas em processamento de dados e imagens.
 
 
